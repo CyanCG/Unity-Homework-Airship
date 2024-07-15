@@ -4,22 +4,19 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-// Singleton
 public class WorldEvents : MonoBehaviour
 {
+    // Singleton
     public static WorldEvents Instance { get; private set; }
 
     private void Awake()
     {
-        Debug.Log("!!");
-
         if (Instance)
         {
             Destroy(this);
             return;
         }
         Instance = this;
-        Debug.Log("??");
     }
 
     public bool Pause { get; private set; } = true;

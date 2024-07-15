@@ -4,25 +4,11 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    private void OnEnable()
+    private void Start()
     {
-        if (!WorldEvents.Instance)
-        {
-            Debug.Log("No");
-        }
-        // WorldEvents.Instance.OnResume += OnWorldResume;
-        // WorldEvents.Instance.OnPause += OnWorldPause;
-        // WorldEvents.Instance.OnRestart += OnWorldRestart;
-        // WorldEvents.Instance.OnDead += OnHeroDead;
+        WorldEvents.Instance.OnResume += OnWorldResume;
     }
 
-    private void OnDisable()
-    {
-        // WorldEvents.Instance.OnResume -= OnWorldResume;
-        // WorldEvents.Instance.OnPause -= OnWorldPause;
-        // WorldEvents.Instance.OnRestart -= OnWorldRestart;
-        // WorldEvents.Instance.OnDead -= OnHeroDead;
-    }
 
     private void OnWorldResume()
     {
