@@ -114,6 +114,54 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Test"",
+            ""id"": ""a8eb74d3-10b0-42cb-938e-bdb4f39bd603"",
+            ""actions"": [
+                {
+                    ""name"": ""Die"",
+                    ""type"": ""Button"",
+                    ""id"": ""ead1394d-cfeb-4b30-9e03-adc888977d40"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddScore"",
+                    ""type"": ""Button"",
+                    ""id"": ""aafccf7d-73ab-4b1e-86c2-9841e2377279"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7fe87688-e7ea-4052-a793-84588c754289"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Die"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbb6616d-bd83-4106-bdcd-a2c7c7439772"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddScore"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -122,6 +170,10 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
         m_Hero = asset.FindActionMap("Hero", throwIfNotFound: true);
         m_Hero_Move = m_Hero.FindAction("Move", throwIfNotFound: true);
         m_Hero_Fire = m_Hero.FindAction("Fire", throwIfNotFound: true);
+        // Test
+        m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
+        m_Test_Die = m_Test.FindAction("Die", throwIfNotFound: true);
+        m_Test_AddScore = m_Test.FindAction("AddScore", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -233,9 +285,68 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
         }
     }
     public HeroActions @Hero => new HeroActions(this);
+
+    // Test
+    private readonly InputActionMap m_Test;
+    private List<ITestActions> m_TestActionsCallbackInterfaces = new List<ITestActions>();
+    private readonly InputAction m_Test_Die;
+    private readonly InputAction m_Test_AddScore;
+    public struct TestActions
+    {
+        private @UserControls m_Wrapper;
+        public TestActions(@UserControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Die => m_Wrapper.m_Test_Die;
+        public InputAction @AddScore => m_Wrapper.m_Test_AddScore;
+        public InputActionMap Get() { return m_Wrapper.m_Test; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
+        public void AddCallbacks(ITestActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TestActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TestActionsCallbackInterfaces.Add(instance);
+            @Die.started += instance.OnDie;
+            @Die.performed += instance.OnDie;
+            @Die.canceled += instance.OnDie;
+            @AddScore.started += instance.OnAddScore;
+            @AddScore.performed += instance.OnAddScore;
+            @AddScore.canceled += instance.OnAddScore;
+        }
+
+        private void UnregisterCallbacks(ITestActions instance)
+        {
+            @Die.started -= instance.OnDie;
+            @Die.performed -= instance.OnDie;
+            @Die.canceled -= instance.OnDie;
+            @AddScore.started -= instance.OnAddScore;
+            @AddScore.performed -= instance.OnAddScore;
+            @AddScore.canceled -= instance.OnAddScore;
+        }
+
+        public void RemoveCallbacks(ITestActions instance)
+        {
+            if (m_Wrapper.m_TestActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITestActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TestActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TestActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TestActions @Test => new TestActions(this);
     public interface IHeroActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+    }
+    public interface ITestActions
+    {
+        void OnDie(InputAction.CallbackContext context);
+        void OnAddScore(InputAction.CallbackContext context);
     }
 }

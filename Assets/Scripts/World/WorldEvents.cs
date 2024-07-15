@@ -25,6 +25,7 @@ public class WorldEvents : MonoBehaviour
     public UnityAction OnRestart;
     public UnityAction OnDead;
     public UnityAction<int> OnChangeAirship;
+    public UnityAction<int> OnChangeScore;
 
     public void RaiseStart() => OnStart?.Invoke();
     public void RaiseResume() => OnResume?.Invoke();
@@ -32,4 +33,5 @@ public class WorldEvents : MonoBehaviour
     public void RaiseRestart() => OnRestart?.Invoke();
     public void RaiseDead() => OnDead?.Invoke();
     public void RaiseChangeAirship(int index) => OnChangeAirship?.Invoke(index);
+    public void RaiseChangeScore(int num) => OnChangeScore?.Invoke(num);
 }

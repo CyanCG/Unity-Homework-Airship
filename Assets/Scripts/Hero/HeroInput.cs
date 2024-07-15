@@ -18,10 +18,19 @@ public class HeroInput : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Enable();
+    }
+
+    private void Start()
+    {
         inputActions.Hero.Move.performed += OnMove;
         inputActions.Hero.Move.canceled += OnMove;
         inputActions.Hero.Fire.performed += OnFire;
         inputActions.Hero.Fire.canceled += OnFire;
+        #region for test
+        inputActions.Test.Die.performed += (c) => WorldEvents.Instance.RaiseDead();
+        inputActions.Test.AddScore.performed += (c) =>
+            WorldEvents.Instance.RaiseChangeScore(WorldState.Instance.Score + 1);
+        #endregion
     }
 
     private void OnDisable()

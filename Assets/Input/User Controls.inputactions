@@ -92,6 +92,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Test",
+            "id": "a8eb74d3-10b0-42cb-938e-bdb4f39bd603",
+            "actions": [
+                {
+                    "name": "Die",
+                    "type": "Button",
+                    "id": "ead1394d-cfeb-4b30-9e03-adc888977d40",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AddScore",
+                    "type": "Button",
+                    "id": "aafccf7d-73ab-4b1e-86c2-9841e2377279",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7fe87688-e7ea-4052-a793-84588c754289",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Die",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbb6616d-bd83-4106-bdcd-a2c7c7439772",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddScore",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
