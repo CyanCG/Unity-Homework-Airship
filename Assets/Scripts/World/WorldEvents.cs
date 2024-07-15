@@ -24,10 +24,12 @@ public class WorldEvents : MonoBehaviour
     public UnityAction OnPause;
     public UnityAction OnRestart;
     public UnityAction OnDead;
+    public UnityAction<int> OnChangeAirship;
 
     public void RaiseStart() => OnStart?.Invoke();
     public void RaiseResume() => OnResume?.Invoke();
     public void RaisePause() => OnPause?.Invoke();
     public void RaiseRestart() => OnRestart?.Invoke();
     public void RaiseDead() => OnDead?.Invoke();
+    public void RaiseChangeAirship(int index) => OnChangeAirship?.Invoke(index);
 }
