@@ -136,6 +136,15 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hurt"",
+                    ""type"": ""Button"",
+                    ""id"": ""2defd5f5-641b-4f19-b6f2-f3f59e8c961a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -160,6 +169,17 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
                     ""action"": ""AddScore"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1754e686-4254-40ab-8508-6bbeb6beaa60"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hurt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -174,6 +194,7 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
         m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
         m_Test_Die = m_Test.FindAction("Die", throwIfNotFound: true);
         m_Test_AddScore = m_Test.FindAction("AddScore", throwIfNotFound: true);
+        m_Test_Hurt = m_Test.FindAction("Hurt", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -291,12 +312,14 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
     private List<ITestActions> m_TestActionsCallbackInterfaces = new List<ITestActions>();
     private readonly InputAction m_Test_Die;
     private readonly InputAction m_Test_AddScore;
+    private readonly InputAction m_Test_Hurt;
     public struct TestActions
     {
         private @UserControls m_Wrapper;
         public TestActions(@UserControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Die => m_Wrapper.m_Test_Die;
         public InputAction @AddScore => m_Wrapper.m_Test_AddScore;
+        public InputAction @Hurt => m_Wrapper.m_Test_Hurt;
         public InputActionMap Get() { return m_Wrapper.m_Test; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -312,6 +335,9 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
             @AddScore.started += instance.OnAddScore;
             @AddScore.performed += instance.OnAddScore;
             @AddScore.canceled += instance.OnAddScore;
+            @Hurt.started += instance.OnHurt;
+            @Hurt.performed += instance.OnHurt;
+            @Hurt.canceled += instance.OnHurt;
         }
 
         private void UnregisterCallbacks(ITestActions instance)
@@ -322,6 +348,9 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
             @AddScore.started -= instance.OnAddScore;
             @AddScore.performed -= instance.OnAddScore;
             @AddScore.canceled -= instance.OnAddScore;
+            @Hurt.started -= instance.OnHurt;
+            @Hurt.performed -= instance.OnHurt;
+            @Hurt.canceled -= instance.OnHurt;
         }
 
         public void RemoveCallbacks(ITestActions instance)
@@ -348,5 +377,6 @@ public partial class @UserControls: IInputActionCollection2, IDisposable
     {
         void OnDie(InputAction.CallbackContext context);
         void OnAddScore(InputAction.CallbackContext context);
+        void OnHurt(InputAction.CallbackContext context);
     }
 }

@@ -26,6 +26,7 @@ public class WorldEvents : MonoBehaviour
     public UnityAction OnDead;
     public UnityAction<int> OnChangeAirship;
     public UnityAction<int> OnChangeScore;
+    public UnityAction<float> OnChangeHealth;
 
     public void RaiseStart() => OnStart?.Invoke();
     public void RaiseResume() => OnResume?.Invoke();
@@ -34,4 +35,5 @@ public class WorldEvents : MonoBehaviour
     public void RaiseDead() => OnDead?.Invoke();
     public void RaiseChangeAirship(int index) => OnChangeAirship?.Invoke(index);
     public void RaiseChangeScore(int num) => OnChangeScore?.Invoke(num);
+    public void RaiseChangeHealth(float num) => OnChangeHealth?.Invoke(num);
 }

@@ -26,10 +26,13 @@ public class HeroInput : MonoBehaviour
         inputActions.Hero.Move.canceled += OnMove;
         inputActions.Hero.Fire.performed += OnFire;
         inputActions.Hero.Fire.canceled += OnFire;
+
         #region for test
         inputActions.Test.Die.performed += (c) => WorldEvents.Instance.RaiseDead();
         inputActions.Test.AddScore.performed += (c) =>
             WorldEvents.Instance.RaiseChangeScore(WorldState.Instance.Score + 1);
+        inputActions.Test.Hurt.performed += (c) =>
+            WorldEvents.Instance.RaiseChangeHealth(WorldState.Instance.Health - 25);
         #endregion
     }
 
