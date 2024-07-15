@@ -19,35 +19,15 @@ public class WorldEvents : MonoBehaviour
         Instance = this;
     }
 
-    public bool Pause { get; private set; } = true;
-
+    public UnityAction OnStart;
     public UnityAction OnResume;
     public UnityAction OnPause;
     public UnityAction OnRestart;
     public UnityAction OnDead;
 
-    public void RaiseResume()
-    {
-        Pause = false;
-        OnResume?.Invoke();
-    }
-    public void RaisePause()
-    {
-        Pause = true;
-        OnPause?.Invoke();
-    }
-
-    public void TogglePause()
-    {
-        if (!Pause)
-        {
-            RaisePause();
-        }
-        else
-        {
-            RaiseResume();
-        }
-    }
+    public void RaiseStart() => OnStart?.Invoke();
+    public void RaiseResume() => OnResume?.Invoke();
+    public void RaisePause() => OnPause?.Invoke();
     public void RaiseRestart() => OnRestart?.Invoke();
     public void RaiseDead() => OnDead?.Invoke();
 }

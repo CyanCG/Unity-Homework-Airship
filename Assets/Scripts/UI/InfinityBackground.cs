@@ -10,16 +10,26 @@ public class InfinityBackground : MonoBehaviour
 
     private Vector2 offset;
     private const string texName = "_MainTex";
-
+    private bool pause;
 
     private void Start()
     {
+        pause = true;
         offset = BackgroundRenderer.material.GetTextureOffset(texName);
+
+        WorldEvents.Instance.OnPause += Pause;
+        WorldEvents.Instance.OnDead += Pause;
+        WorldEvents.Instance.OnRestart += Pause;
+        WorldEvents.Instance.OnResume += Resume;
+        WorldEvents.Instance.OnStart += Resume;
     }
+
+    private void Pause() => pause = true;
+    private void Resume() => pause = false;
 
     private void Update()
     {
-        if (WorldEvents.Instance.Pause)
+        if (pause)
         {
             return;
         }

@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject StartPannel;
+    public GameObject HUDPannel;
+    public GameObject DeadPannel;
+
     private void Start()
     {
-        WorldEvents.Instance.OnResume += OnWorldResume;
+        OnWorldRestart();
+
+        WorldEvents.Instance.OnStart += OnGameStart;
+        WorldEvents.Instance.OnRestart += OnWorldRestart;
+        WorldEvents.Instance.OnDead += OnHeroDead;
     }
 
-
-    private void OnWorldResume()
+    private void OnGameStart()
     {
-
+        StartPannel.SetActive(false);
+        HUDPannel.SetActive(true);
+        DeadPannel.SetActive(false);
     }
-    private void OnWorldPause()
-    {
 
-    }
     private void OnWorldRestart()
     {
-
+        StartPannel.SetActive(true);
+        HUDPannel.SetActive(false);
+        DeadPannel.SetActive(false);
     }
     private void OnHeroDead()
     {
-
+        StartPannel.SetActive(false);
+        HUDPannel.SetActive(false);
+        DeadPannel.SetActive(true);
     }
 }
