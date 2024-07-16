@@ -50,6 +50,12 @@ MonoBehaviour:
   - EnemyPrefab: {fileID: 8280832319487112266, guid: ce4fd2e3f5bbd7d49ac0ad4e65ee95aa, type: 3}
     RefreshCooldown: 1
     RefreshTimeout: 0
+  - EnemyPrefab: {fileID: 8280832319487112266, guid: 8078209236b1ad647becad1eeae2eed5, type: 3}
+    RefreshCooldown: 2
+    RefreshTimeout: 0
+  - EnemyPrefab: {fileID: 8280832319487112266, guid: f55179ddbf587124084fc4e57042fde7, type: 3}
+    RefreshCooldown: 4
+    RefreshTimeout: 0
   StartPos: {fileID: 4855530630601770803}
   EndPos: {fileID: 431161224389943498}
 --- !u!1 &2985434454887435442

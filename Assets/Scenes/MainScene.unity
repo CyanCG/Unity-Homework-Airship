@@ -3667,18 +3667,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8606489028936524881, guid: 411f12d9aaa93214e872f180232ff8ad, type: 3}
-      propertyPath: enemyConfigs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8606489028936524881, guid: 411f12d9aaa93214e872f180232ff8ad, type: 3}
-      propertyPath: enemyConfigs.Array.data[1].EnemyPrefab
-      value: 
-      objectReference: {fileID: 8280832319487112266, guid: 8078209236b1ad647becad1eeae2eed5, type: 3}
-    - target: {fileID: 8606489028936524881, guid: 411f12d9aaa93214e872f180232ff8ad, type: 3}
-      propertyPath: enemyConfigs.Array.data[1].RefreshCooldown
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
