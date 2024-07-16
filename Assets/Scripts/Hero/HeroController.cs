@@ -5,11 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(HeroInput))]
-public class HeroController : MonoBehaviour
+public class HeroController : MonoBehaviour, IVictim
 {
     public Transform StartPosition;
 
     public GameObject[] AirshipSpirtes;
+
+    public BulletEmitter Emitter;
+
     public float Speed = 5.0f;
     public float FireCooldown = 0.2f;
 
@@ -72,6 +75,12 @@ public class HeroController : MonoBehaviour
             return;
         }
         fireTimeout = FireCooldown;
-        Debug.Log("Fire");
+        // Debug.Log("Fire");
+        Emitter.Emit();
+    }
+
+    public void OnGotAttack(float damage)
+    {
+        WorldEvents.Instance.OnChangeHealth(WorldState.Instance.Health - damage);
     }
 }
