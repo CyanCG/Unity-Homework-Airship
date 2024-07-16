@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6968071376252070190}
   - component: {fileID: 2017919714746133490}
   - component: {fileID: 154073735766854899}
-  m_Layer: 7
-  m_Name: HeroBullet
+  m_Layer: 0
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,10 +47,10 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 192
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 311
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -82,8 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6f953d7c52e13498907db62889ba5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 100
-  Speed: 7
+  Damage: 25
+  Speed: 6
 --- !u!212 &2017919714746133490
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ae13e2dc27bc01448b61cccdcebb65ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53b7d7162e5446e4f8d61c0756bf600b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -155,10 +155,10 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 192
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 311
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

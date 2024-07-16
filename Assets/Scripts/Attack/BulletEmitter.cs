@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 public class BulletEmitter : MonoBehaviour
 {
     public GameObject BulletPrefab;
-    public Transform EmitterTrans;
+    public Transform[] EmitterTrans;
 
     private ObjectPool<GameObject> pool;
 
@@ -35,17 +35,19 @@ public class BulletEmitter : MonoBehaviour
     private void OnGetBullet(GameObject go)
     {
         go.SetActive(true);
-        var bu = go.GetComponent<Bullet>();
-        if (!bu)
-        {
-            return;
-        }
-        bu.StartMove(EmitterTrans.position, EmitterTrans.forward);
     }
 
     public void Emit()
     {
-        var bulletGo = pool.Get();
-        bulletGo.SetActive(true);
+        foreach (var et in EmitterTrans)
+        {
+            var bulletGo = pool.Get();
+            bulletGo.SetActive(true);
+            var bu = bulletGo.GetComponent<Bullet>();
+            if (bu)
+            {
+                bu.StartMove(et.position, et.forward);
+            }
+        }
     }
 }
